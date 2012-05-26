@@ -1,9 +1,11 @@
 #!/bin/bash
 # Website backup
 ########################################################################
-# Website backup script made by Fabian Norman (fnorman@uoregon.edu, FabianN@gmail.com)
-# This script is designed to backup the files and the MySQL database for a web site. The backup will be placed into a dated tarball.
-# Using this script in any manner other than directed is not advisable.
+# Website backup script made by Fabian Norman (fnorman@uoregon.edu,
+# FabianN@gmail.com). This script is designed to backup the files and
+# the MySQL database for a web site. The backup will be placed into a
+# dated tarball. Using this script in any manner other than directed
+# is not advisable.
 ########################################################################
 
 # Location of site files
@@ -21,19 +23,15 @@ BACKUP_DIR="~/backup/"
 
 # First, lets setup a temp location where the files will go before being tar'd.
 
-TODO: check if temp folder already there, if so remove it. Then create the temp folder.
-
+if [ -d "/tmp/site_backup_sj2lksdf003l" ]; then
+    rm -r /tmp/site_backup_sj2lksdf003l
+fi
+mkdir -p /tmp/site_backup_sj2lksdf003l/web_files
+mkdir -p /tmp/site_backup_sj2lksdf003l/mysql_file
 
 # Now lets copy the web files over to the temp location
 
-
 # And now lets create a MYSQL dump of the wanted database. Then copy it to the temp location.
 
-
 # Now lets take all the contents of the temp location and tar it into the desired backup location.
-
-
-
-
-
 
