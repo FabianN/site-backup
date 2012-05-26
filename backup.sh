@@ -39,3 +39,7 @@ mysqldump -u $MYSQL_USER -h $MYSQL_HOST -p$MYSQL_PASSWORD $MYSQL_DATABASE | gzip
 
 # Now lets take all the contents of the temp location and tar it into the desired backup location.
 
+DATE=date +'%F_%R'
+cd /tmp/site_backup_sj2lksdf003l/
+tar -czf $BACKUP_DIR/$DATE_$MYSQL_DATABASE.tgz ./
+
