@@ -31,6 +31,8 @@ mkdir -p /tmp/site_backup_sj2lksdf003l/mysql_file
 
 # Now lets copy the web files over to the temp location
 
+rsync -rqa $WWW_DIR /tmp/site_backup_sj2lksdf003l/web_files
+
 # And now lets create a MYSQL dump of the wanted database. Then copy it to the temp location.
 
 # Now lets take all the contents of the temp location and tar it into the desired backup location.
