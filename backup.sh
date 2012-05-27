@@ -19,6 +19,8 @@ MYSQL_DATABASE="database"
 
 # Location to store the backups
 BACKUP_DIR="/backup"
+# Name of backup file.
+BACKUP_NAME="web_site"
 
 if [[ $1 == '--config' ]]; then
 	[ -f $2 ] && source $2
@@ -46,6 +48,6 @@ mysqldump -u $MYSQL_USER -h $MYSQL_HOST -p$MYSQL_PASS $MYSQL_DATABASE > $MYSQL_F
 if [ ! -d $BACKUP_DIR ]; then
     mkdir -p $BACKUP_DIR
 fi
-FILE=$BACKUP_DIR/$(date +%F_%H-%M)_$MYSQL_DATABASE.tgz
+FILE=$BACKUP_DIR/$BACKUP_NAME'_'$(date +%F_%H-%M).tgz
 cd /tmp/site_backup_sj2lksdf003l/
 tar -C /tmp/site_backup_sj2lksdf003l/ -czvf $FILE ./*
