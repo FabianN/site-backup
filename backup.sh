@@ -43,6 +43,9 @@ mysqldump -u $MYSQL_USER -h $MYSQL_HOST -p$MYSQL_PASS $MYSQL_DATABASE > $MYSQL_F
 
 # Now lets take all the contents of the temp location and tar it into the desired backup location.
 
+if [ ! -d $BACKUP_DIR ]; then
+    mkdir -p $BACKUP_DIR
+fi
 FILE=$BACKUP_DIR/$(date +%F_%H-%M)_$MYSQL_DATABASE.tgz
 cd /tmp/site_backup_sj2lksdf003l/
 tar -C /tmp/site_backup_sj2lksdf003l/ -czvf $FILE ./*
