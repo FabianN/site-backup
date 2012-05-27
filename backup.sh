@@ -9,7 +9,7 @@
 ########################################################################
 
 # Location of site files
-WWW_DIR="/var/www/"
+WWW_DIR="/var/www"
 
 # MYSQL database info
 MYSQL_USER="backup"
@@ -18,7 +18,7 @@ MYSQL_HOST="localhost"
 MYSQL_DATABASE="database"
 
 # Location to store the backups
-BACKUP_DIR="~/backup/"
+BACKUP_DIR="/backup"
 
 
 # First, lets setup a temp location where the files will go before being tar'd.
@@ -31,15 +31,15 @@ mkdir -p /tmp/site_backup_sj2lksdf003l/mysql_file
 
 # Now lets copy the web files over to the temp location
 
-rsync -rqa $WWW_DIR /tmp/site_backup_sj2lksdf003l/web_files
+rsync -rqa $WWW_DIR/ /tmp/site_backup_sj2lksdf003l/web_files
 
 # And now lets create a MYSQL dump of the wanted database. Then copy it to the temp location.
 
-mysqldump -u $MYSQL_USER -h $MYSQL_HOST -p$MYSQL_PASSWORD $MYSQL_DATABASE | gzip > /tmp/site_backup_sj2lksdf003l/mysql_file/$MYSQL_DATABASE_backup.sql.gz
+MYSQL_FILE=/tmp/site_backup_sj2lksdf003l/mysql_file/$MYSQL_DATABASE'_backup.sql'	
+mysqldump -u $MYSQL_USER -h $MYSQL_HOST -p$MYSQL_PASS $MYSQL_DATABASE > $MYSQL_FILE
 
 # Now lets take all the contents of the temp location and tar it into the desired backup location.
 
-DATE=date +'%F_%R'
+FILE=$BACKUP_DIR/$(date +%F_%H-%M)_$MYSQL_DATABASE.tgz
 cd /tmp/site_backup_sj2lksdf003l/
-tar -czf $BACKUP_DIR/$DATE_$MYSQL_DATABASE.tgz ./
-
+tar -C /tmp/site_backup_sj2lksdf003l/ -czvf $FILE ./*
