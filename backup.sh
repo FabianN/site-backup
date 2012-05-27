@@ -1,5 +1,5 @@
 #!/bin/bash
-# Website backup
+# Website backup v.0.1
 ########################################################################
 # Website backup script made by Fabian Norman (fnorman@uoregon.edu,
 # FabianN@gmail.com). This script is designed to backup the files and
