@@ -32,7 +32,9 @@ if [ -d "/tmp/site_backup_sj2lksdf003l" ]; then
     rm -r /tmp/site_backup_sj2lksdf003l
 fi
 mkdir -p /tmp/site_backup_sj2lksdf003l/web_files
-mkdir -p /tmp/site_backup_sj2lksdf003l/mysql_file
+if (( -n "$MYSQL_USER" )) && (( -n "$MYSQL_PASS" )) && (( -n "$MYSQL_HOST" )) && (( -n "$MYSQL_DATABASE" )); then
+	mkdir -p /tmp/site_backup_sj2lksdf003l/mysql_file
+fi
 
 # Now lets copy the web files over to the temp location
 
@@ -40,8 +42,10 @@ rsync -rqa $WWW_DIR/ /tmp/site_backup_sj2lksdf003l/web_files
 
 # And now lets create a MYSQL dump of the wanted database. Then copy it to the temp location.
 
-MYSQL_FILE=/tmp/site_backup_sj2lksdf003l/mysql_file/$MYSQL_DATABASE'_backup.sql'	
-mysqldump -u $MYSQL_USER -h $MYSQL_HOST -p$MYSQL_PASS $MYSQL_DATABASE > $MYSQL_FILE
+if (( -n "$MYSQL_USER" )) && (( -n "$MYSQL_PASS" )) && (( -n "$MYSQL_HOST" )) && (( -n "$MYSQL_DATABASE" )); then
+	MYSQL_FILE=/tmp/site_backup_sj2lksdf003l/mysql_file/$MYSQL_DATABASE'_backup.sql'
+	mysqldump -u $MYSQL_USER -h $MYSQL_HOST -p$MYSQL_PASS $MYSQL_DATABASE > $MYSQL_FILE
+fi
 
 # Now lets take all the contents of the temp location and tar it into the desired backup location.
 

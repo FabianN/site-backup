@@ -28,6 +28,8 @@ Replace with the information for the MySQL database.
 * *MYSQL_DATABASE* with the name of the MySQL database.
 * *MYSQL_HOST* with the host/location of the MySQL server.
 
+**NOTE:** If you do not use a MySQL database, do not enter anything into **any** of the MySQL settings. Leave them all blank or remove them entirely. You MUST remove them from the main backup.sh file though, even if you are using config files.
+
 ### Backup Directory
 
        BACKUP_DIR="/backup"
