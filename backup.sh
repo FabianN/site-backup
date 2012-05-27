@@ -20,6 +20,9 @@ MYSQL_DATABASE="database"
 # Location to store the backups
 BACKUP_DIR="/backup"
 
+if [[ $1 == '--config' ]]; then
+	[ -f $2 ] && source $2
+fi
 
 # First, lets setup a temp location where the files will go before being tar'd.
 
