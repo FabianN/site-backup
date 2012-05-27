@@ -50,4 +50,4 @@ if [ ! -d $BACKUP_DIR ]; then
 fi
 FILE=$BACKUP_DIR/$BACKUP_NAME'_'$(date +%F_%H-%M).tgz
 cd /tmp/site_backup_sj2lksdf003l/
-tar -C /tmp/site_backup_sj2lksdf003l/ -czvf $FILE ./*
+tar -C /tmp/site_backup_sj2lksdf003l/ -czf $FILE ./*
