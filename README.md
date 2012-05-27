@@ -6,7 +6,7 @@ This script is for automating the backup of sites, their web files and an associ
 
 You can declare the settings in the backup.sh file or you may create a config file to declare all the settings. To run with a config file you want to run : `./backup.sh --config ./path/to/configfile.sh`
 
-To run you need to supply the following settings, either edited in the main backup.sh file or provided via a config file:
+To run you need to supply the following settings, either edited in the main backup.sh file or provided via a config file.
 
 ### Location of Web files
 
