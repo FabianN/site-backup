@@ -1,11 +1,10 @@
 #!/bin/bash
 # Website backup v.0.1
 ########################################################################
-# Website backup script made by Fabian Norman (fnorman@uoregon.edu,
-# FabianN@gmail.com). This script is designed to backup the files and
-# the MySQL database of a web site. The backup will be placed into a
-# dated tar. Using this script in any manner other than directed
-# is not advisable.
+# Website backup script made by Fabian Norman (FabianN AT gmail DOT com)
+# This script is designed to backup the files and the MySQL database of
+# a web site. The backup will be placed into a dated tar. Using this
+# script in any manner other than directed is not advisable.
 ########################################################################
 
 # Location of site files
