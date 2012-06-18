@@ -25,8 +25,8 @@ BACKUP_DIR="/backup"
 # Name of backup file.
 BACKUP_NAME="web_site"
 
-# How old should the backup be to be removed?
-REMOVE="-mtime 5"
+# How old should the backup be to be removed? Currently set to 5 days old.
+REMOVE="-mtime +5"
 
 
 if [[ $1 == '--config' ]]; then
@@ -61,9 +61,16 @@ if [ ! -d $BACKUP_DIR ]; then
 fi
 FILE=$BACKUP_DIR/$BACKUP_NAME'_'$(date +%F_%H-%M).tgz
 cd $TMP
-tar -czf $FILE ./mysql_file ./web_files
+if [ -n "$MYSQL_USER" ] && [ -n "$MYSQL_PASS" ] && [ -n "$MYSQL_HOST" ] && [ -n "$MYSQL_DATABASE" ]; then
+	tar -czf $FILE ./mysql_file ./web_files
+else
+	tar -czf $FILE ./web_files
+fi
 
 # Now remove old backup files
 if [ -n "$REMOVE" ]; then
-	find $BACKUP_DIR -type f -name *.tgz $REMOVE -delete
+	find $BACKUP_DIR -type f -name '*.tgz' $REMOVE -delete
 fi
+
+# Clean up tmp folder
+rm -r $TMP
