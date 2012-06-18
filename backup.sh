@@ -11,6 +11,9 @@
 # Location of site files
 WWW_DIR="/var/www"
 
+# Temp file location
+TMP="/tmp/site_backup_sj2lksdf003l"
+
 # MYSQL database info
 MYSQL_USER="backup"
 MYSQL_PASS="password"
@@ -32,22 +35,22 @@ fi
 
 # First, lets setup a temp location where the files will go before being tar'd.
 
-if [ -d "/tmp/site_backup_sj2lksdf003l" ]; then
-    rm -r /tmp/site_backup_sj2lksdf003l
+if [ -d $TMP ]; then
+    rm -r $TMP
 fi
-mkdir -p /tmp/site_backup_sj2lksdf003l/web_files
+mkdir -p $TMP/web_files
 if (( -n "$MYSQL_USER" )) && (( -n "$MYSQL_PASS" )) && (( -n "$MYSQL_HOST" )) && (( -n "$MYSQL_DATABASE" )); then
-	mkdir -p /tmp/site_backup_sj2lksdf003l/mysql_file
+	mkdir -p $TMP/mysql_file
 fi
 
 # Now lets copy the web files over to the temp location
 
-rsync -rqa $WWW_DIR/ /tmp/site_backup_sj2lksdf003l/web_files
+rsync -rqa $WWW_DIR/ $TMP/web_files
 
 # And now lets create a MYSQL dump of the wanted database. Then copy it to the temp location.
 
 if (( -n "$MYSQL_USER" )) && (( -n "$MYSQL_PASS" )) && (( -n "$MYSQL_HOST" )) && (( -n "$MYSQL_DATABASE" )); then
-	MYSQL_FILE=/tmp/site_backup_sj2lksdf003l/mysql_file/$MYSQL_DATABASE'_backup.sql'
+	MYSQL_FILE=$TMP'/mysql_file/'$MYSQL_DATABASE'_backup.sql'
 	mysqldump -u $MYSQL_USER -h $MYSQL_HOST -p$MYSQL_PASS $MYSQL_DATABASE > $MYSQL_FILE
 fi
 
@@ -57,7 +60,7 @@ if [ ! -d $BACKUP_DIR ]; then
     mkdir -p $BACKUP_DIR
 fi
 FILE=$BACKUP_DIR/$BACKUP_NAME'_'$(date +%F_%H-%M).tgz
-cd /tmp/site_backup_sj2lksdf003l/
+cd $TMP
 tar -czf $FILE ./mysql_file ./web_files
 
 # Now remove old backup files
