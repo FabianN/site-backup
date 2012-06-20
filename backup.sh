@@ -66,6 +66,9 @@ else
 	tar -czf $FILE ./web_files
 fi
 
+# Create symlnk for latest backup.
+ln $FILE $BACKUP_DIR/latest.tgz
+
 # Now remove old backup files
 if [ -n "$REMOVE" ]; then
 	find $BACKUP_DIR -type f -name '*.tgz' $REMOVE -delete
